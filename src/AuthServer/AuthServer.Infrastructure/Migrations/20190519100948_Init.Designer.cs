@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthServer.Infrastructure.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20190403041320_initial")]
-    partial class initial
+    [Migration("20190519100948_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -36,11 +36,11 @@ namespace AuthServer.Infrastructure.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<string>("FullName");
+
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -100,10 +100,17 @@ namespace AuthServer.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "27e8d4aa-67ca-48af-a986-7059029dbefb",
-                            ConcurrencyStamp = "96def603-94ae-4f01-b766-fc2bee1f06ab",
-                            Name = "consumer",
-                            NormalizedName = "CONSUMER"
+                            Id = "16ed88c6-3c8c-489b-b06e-e83a0d49efac",
+                            ConcurrencyStamp = "e255ff50-fec2-419e-916d-569d76784ebe",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "bbcdf332-9761-4319-ad7e-9ede90b44376",
+                            ConcurrencyStamp = "32c16144-3309-4689-8bb7-9cc74448c120",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
                         });
                 });
 

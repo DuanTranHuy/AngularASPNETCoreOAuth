@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthServer.Infrastructure.Migrations.PersistedGrantDb
 {
     [DbContext(typeof(PersistedGrantDbContext))]
-    [Migration("20190403041351_initial")]
-    partial class initial
+    [Migration("20190519101150_InitIdentity")]
+    partial class InitIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

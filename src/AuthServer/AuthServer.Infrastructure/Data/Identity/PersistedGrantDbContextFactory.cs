@@ -11,7 +11,7 @@ namespace AuthServer.Infrastructure.Data.Identity
         public PersistedGrantDbContext CreateDbContext(string[] args)
         {
             var optionsBuilder = new DbContextOptionsBuilder<PersistedGrantDbContext>();
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AuthServer;Trusted_Connection=True;MultipleActiveResultSets=true",
+            optionsBuilder.UseSqlServer("Server=45.122.223.5;Database=Identity;User ID=admin;Password=Qwe123!@#",
                 sql => sql.MigrationsAssembly(typeof(PersistedGrantDbContextFactory).GetTypeInfo().Assembly.GetName().Name));
             return new PersistedGrantDbContext(optionsBuilder.Options, new OperationalStoreOptions());
         }

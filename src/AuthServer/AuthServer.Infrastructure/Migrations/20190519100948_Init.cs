@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AuthServer.Infrastructure.Migrations
 {
-    public partial class initial : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -41,7 +41,7 @@ namespace AuthServer.Infrastructure.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    FullName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -157,7 +157,12 @@ namespace AuthServer.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "27e8d4aa-67ca-48af-a986-7059029dbefb", "96def603-94ae-4f01-b766-fc2bee1f06ab", "consumer", "CONSUMER" });
+                values: new object[] { "16ed88c6-3c8c-489b-b06e-e83a0d49efac", "e255ff50-fec2-419e-916d-569d76784ebe", "User", "USER" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { "bbcdf332-9761-4319-ad7e-9ede90b44376", "32c16144-3309-4689-8bb7-9cc74448c120", "Admin", "ADMIN" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

@@ -94,7 +94,7 @@ namespace AuthServer.Controllers
                 var user = await _userManager.FindByNameAsync(model.Username);
                 if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
                 {
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.Name));
+                    await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.FullName));
 
                     // only set explicit expiration here if user chooses "remember me". 
                     // otherwise we rely upon expiration configured in cookie middleware.
@@ -161,17 +161,16 @@ namespace AuthServer.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new AppUser { UserName = model.Email, Name = model.Name, Email = model.Email };
+            var user = new AppUser { UserName = model.Email, FullName = model.FullName, Email = model.Email };
 
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
             
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("userName", user.UserName));
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("name", user.Name));
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("fullName", user.FullName));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));
-            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", Roles.Consumer));
-
+            await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("role", Roles.User));
             return Ok(new RegisterResponseViewModel(user));
         }
 
