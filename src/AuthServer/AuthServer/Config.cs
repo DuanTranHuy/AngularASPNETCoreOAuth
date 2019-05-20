@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using IdentityServer4;
 using IdentityServer4.Models;
 
 namespace AuthServer
@@ -10,8 +11,12 @@ namespace AuthServer
             return new List<IdentityResource>
             {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Email(),
-                new IdentityResources.Profile(),
+                new IdentityResources.Email() { Required = true},
+                new IdentityResources.Profile() {Required = true}
+        //        new IdentityResource(
+        //name: "custom.profile",
+        //displayName: "Custom profile",
+        //claimTypes: new[] { "name", "email", "status" }),
             };
         }
 
@@ -19,10 +24,10 @@ namespace AuthServer
         {
             return new List<ApiResource>
             {
-                new ApiResource("resourceapi", "Resource API")
-                {
-                    Scopes = {new Scope("api.read")}
-                }
+                //new ApiResource("resourceapi", "Resource API")
+                //{
+                //    Scopes = {new Scope("api.read")}
+                //}
             };
         }
 
@@ -31,11 +36,16 @@ namespace AuthServer
             return new[]
             {
                 new Client {
-                    RequireConsent = false,
-                    ClientId = "angular_spa",
-                    ClientName = "Angular SPA",
+                    RequireConsent = true,
+                    ClientId = "kenhdautu247",
+                    ClientName = "Kênh đầu tư 247",
                     AllowedGrantTypes = GrantTypes.Implicit,
-                    AllowedScopes = { "openid", "profile", "email", "api.read" },
+               AllowedScopes = new List<string>
+            {
+                IdentityServerConstants.StandardScopes.OpenId,
+                IdentityServerConstants.StandardScopes.Profile,
+                IdentityServerConstants.StandardScopes.Email,
+            },
                     RedirectUris = {"http://localhost:4200/auth-callback"},
                     PostLogoutRedirectUris = {"http://localhost:4200/"},
                     AllowedCorsOrigins = {"http://localhost:4200"},
