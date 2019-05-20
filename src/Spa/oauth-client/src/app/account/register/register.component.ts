@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   success: boolean;
   error: string;
-  userRegistration: UserRegistration = { name: '', email: '', password: ''};
+  userRegistration: UserRegistration = { fullName: '', email: '', password: ''};
   submitted: boolean = false;
 
   constructor(private authService: AuthService, private spinner: NgxSpinnerService) {
