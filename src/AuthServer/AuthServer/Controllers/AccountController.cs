@@ -166,7 +166,11 @@ namespace AuthServer.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
-            
+
+            var currentUser = await _userManager.FindByNameAsync(user.UserName);
+
+            var roleresult = await  _userManager.AddToRoleAsync(currentUser, Roles.User);
+
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("userName", user.UserName));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("fullName", user.FullName));
             await _userManager.AddClaimAsync(user, new System.Security.Claims.Claim("email", user.Email));

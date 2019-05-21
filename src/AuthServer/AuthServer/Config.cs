@@ -13,10 +13,6 @@ namespace AuthServer
                 new IdentityResources.OpenId(),
                 new IdentityResources.Email() { Required = true},
                 new IdentityResources.Profile() {Required = true}
-        //        new IdentityResource(
-        //name: "custom.profile",
-        //displayName: "Custom profile",
-        //claimTypes: new[] { "name", "email", "status" }),
             };
         }
 
