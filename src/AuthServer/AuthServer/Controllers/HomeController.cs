@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Authentication;
 
 namespace AuthServer.Controllers
 {
@@ -34,6 +34,12 @@ namespace AuthServer.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public async System.Threading.Tasks.Task<IActionResult> Logout()
+        {
+             await HttpContext.SignOutAsync();
+            return RedirectToAction("Index");
         }
     }
 }
